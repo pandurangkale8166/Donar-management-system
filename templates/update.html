@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Donor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>🩸 Update Donor</h2>
+        <form method="POST">
+            <input type="text" name="name" placeholder="Name" value="{{ donor['name'] }}" required>
+            <input type="number" name="age" placeholder="Age" value="{{ donor['age'] }}" required>
+            <input type="text" name="blood_group" placeholder="Blood Group" value="{{ donor['blood_group'] }}" required>
+            <input type="text" name="contact" placeholder="Contact" value="{{ donor['contact'] }}" required>
+            <input type="date" name="donation_date" value="{{ donor['donation_date'] }}" required>
+            <input type="text" name="city" placeholder="City" value="{{ donor['city'] }}" required>
+            <button type="submit">Update Donor</button>
+        </form>
+        <a href="{{ url_for('show') }}" class="btn">Back</a>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

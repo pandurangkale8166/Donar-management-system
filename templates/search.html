@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blood Donor System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Search Blood Donor</h1>
+       <form method="POST" action="{{ url_for('search') }}">
+    <input type="text" name="keyword" placeholder="Enter name, blood group, donation date or city" required>
+    <button type="submit">Search</button>
+</form>
+
+
+        {% if donors %}
+            <h2>Search Results:</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Blood Group</th>
+                        <th>Contact</th>
+                        <th>Donation Date</th>
+                        <th>City</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for donor in donors %}
+                    <tr>
+                        <td>{{ donor['id'] }}</td>
+                        <td>{{ donor['name'] }}</td>
+                        <td>{{ donor['age'] }}</td>
+                        <td>{{ donor['blood_group'] }}</td>
+                        <td>{{ donor['contact'] }}</td>
+                        <td>{{ donor['donation_date'] }}</td>
+                        <td>{{ donor['city'] }}</td>
+
+                        <td>
+                           <a href="{{ url_for('update', id=donor['id']) }}" class="btn update">Update</a>
+                           <a href="{{ url_for('delete', id=donor['id']) }}" class="btn delete">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            {% if keyword %}
+                <p style="text-align:center; color:red;">No donors found for "{{ keyword }}"</p>
+            {% endif %}
+        {% endif %}
+
+        <a href="{{ url_for('home') }}" class="btn">Back to Home</a>
+    </div>
+    </body>
+</html>

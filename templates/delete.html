@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Donor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Delete Donor</h1>
+    <form method="post">
+        <input type="number" name="id" placeholder="Enter Donor ID" required>
+        <button type="submit">Delete</button>
+        <a href="{{ url_for('index') }}" class="btn">Back</a>
+    </form>
+</div>
+</body>
+</html>

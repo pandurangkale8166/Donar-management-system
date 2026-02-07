@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blood Donor System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>🩸 Blood Donor Management System</h1>
+
+    <div class="buttons">
+        <a href="{{ url_for('add') }}" class="btn">Add Donor</a>
+        <a href="{{ url_for('show') }}" class="btn">Show Donors</a>
+    </div>
+
+    <h2>🔍 Search Donor</h2>
+    <form method="post">
+        <input type="text" name="query" placeholder="Enter Name or ID" required>
+        <button type="submit" class="btn">Search</button>
+    </form>
+
+    {% if donor %}
+    <h3>Donor Record Found:</h3>
+    <table>
+        <tr><th>ID</th><th>Name</th><th>Age</th><th>Blood Group</th><th>Contact</th><th>Donation Date</th><th>City</th><th>Action</th></tr>
+        <tr>
+            <td>{{ donor['id'] }}</td>
+            <td>{{ donor['name'] }}</td>
+            <td>{{ donor['age'] }}</td>
+            <td>{{ donor['blood_group'] }}</td>
+            <td>{{ donor['contact'] }}</td>
+            <td>{{ donor['donation_date'] }}</td>
+            <td>{{ donor['city'] }}</td>
+            <td>
+                <a href="{{ url_for('update', id=donor['id']) }}" class="btn update">Update</a>
+                <a href="{{ url_for('delete', id=donor['id']) }}" class="btn delete">Delete</a>
+            </td>
+        </tr>
+    </table>
+    {% elif message %}
+        <p>{{ message }}</p>
+    {% endif %}
+</div>
+</body>
+</html>
